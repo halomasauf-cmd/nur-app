@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"/>
+<meta name="theme-color" content="#0C1C14"/>
+<meta name="apple-mobile-web-app-capable" content="yes"/>
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
+<title>nūr. — Ruang tumbuh muslimah</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500&display=swap"/>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3.19.0/tabler-icons.min.css"/>
+<link rel="stylesheet" href="/style.css"/>
+</head>
+<body>
+
+<!-- ─── SPLASH SCREEN ─────────────────────────────────────────────── -->
+<div id="splash" class="screen active">
+  <svg class="splash-geo" viewBox="0 0 400 800" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <defs>
+      <pattern id="hex" x="0" y="0" width="80" height="92" patternUnits="userSpaceOnUse">
+        <polygon points="40,4 76,24 76,68 40,88 4,68 4,24" fill="none" stroke="#1D9E75" stroke-width="1"/>
+        <polygon points="40,18 62,30 62,62 40,74 18,62 18,30" fill="none" stroke="#1D9E75" stroke-width="0.4"/>
+      </pattern>
+    </defs>
+    <rect width="400" height="800" fill="url(#hex)"/>
+  </svg>
+  <div class="splash-center">
+    <div class="brand-logo">nūr<span>.</span></div>
+    <div class="brand-sub">Ruang tumbuh muslimah</div>
+  </div>
+  <div class="splash-bottom">
+    <p class="splash-tagline">Perjalanan hijrahmu bukan tentang menjadi <em>sempurna.</em> Tapi tentang terus <em>bergerak.</em></p>
+    <button class="btn-main" onclick="App.enterGuest()">Jelajahi dulu — tanpa daftar</button>
+    <div class="btn-text-link" onclick="App.openSheet('sheet-signup')">Sudah punya akun? <span>Masuk</span></div>
+  </div>
+</div>
+
+<!-- ─── MAIN APP ──────────────────────────────────────────────────── -->
+<div id="app" class="screen">
+
+  <!-- Top Nav -->
+  <nav class="topnav">
+    <div class="nav-logo">nūr<span>.</span></div>
+    <div class="nav-right">
+      <div id="nav-cta" class="nav-pill" onclick="App.openSheet('sheet-signup')">Daftar gratis</div>
+      <div class="nav-icon" onclick="App.openSheet('sheet-notif')" aria-label="Notifikasi">
+        <i class="ti ti-bell"></i>
+        <div class="notif-pip" id="notif-pip"></div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Scroll area -->
+  <main class="scroll-area" id="scroll-area">
+
+    <!-- ── Beranda ── -->
+    <section class="page active" id="pg-home" aria-label="Beranda">
+      <div class="hero-card" id="hero-card">
+        <svg class="hero-geo" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <polygon points="50,2 96,26 96,74 50,98 4,74 4,26" fill="none" stroke="#1D9E75" stroke-width="0.8"/>
+          <polygon points="50,16 82,34 82,66 50,84 18,66 18,34" fill="none" stroke="#1D9E75" stroke-width="0.4"/>
+        </svg>
+        <div class="streak-chip"><i class="ti ti-flame"></i> <span id="streak-label">Hari ke-1 perjalananmu</span></div>
+        <div class="hero-title" id="hero-title">Selamat datang, Ukhti. 🌿</div>
+        <div class="hero-sub" id="hero-sub">Kamu masuk sebagai tamu. Daftar gratis untuk menyimpan progressmu.</div>
+        <div class="prog-wrap">
+          <div class="prog-labels"><span>Progress belajar</span><span id="prog-pct">0%</span></div>
+          <div class="prog-track"><div class="prog-fill" id="prog-fill" style="width:0%"></div></div>
+        </div>
+      </div>
+
+      <div class="sec-hd"><div class="sec-title">Mulai dari sini</div></div>
+      <div class="list-stack" id="list-free-home"></div>
+
+      <div class="sec-hd"><div class="sec-title">Video kajian</div><div class="sec-more" onclick="App.switchTab('belajar')">Semua</div></div>
+      <div class="hscroll" id="hscroll-videos"></div>
+
+      <div class="sec-hd" style="margin-top:8px"><div class="sec-title">Event terdekat</div><div class="sec-more" onclick="App.switchTab('komunitas')">Semua</div></div>
+      <div class="event-list" id="event-list-home"></div>
+    </section>
+
+    <!-- ── Belajar ── -->
+    <section class="page" id="pg-belajar" aria-label="Belajar">
+      <div style="padding:14px 18px 16px">
+        <div class="label-sm">Jalur belajarmu</div>
+        <div class="section-title-lg">Hijrah Pemula</div>
+        <div class="prog-card">
+          <div style="flex:1">
+            <div class="prog-labels"><span>Progress keseluruhan</span><span id="prog-pct-b">0%</span></div>
+            <div class="prog-track"><div class="prog-fill" id="prog-fill-b" style="width:0%"></div></div>
+          </div>
+          <div class="prog-big-num" id="prog-num-b">0%</div>
+        </div>
+      </div>
+      <div class="sec-hd"><div class="sec-title">Modul belajar</div></div>
+      <div class="list-stack" id="list-belajar"></div>
+    </section>
+
+    <!-- ── Komunitas ── -->
+    <section class="page" id="pg-komunitas" aria-label="Komunitas">
+      <div class="komunitas-hd">
+        <div><div class="section-title-lg">Komunitas</div><div class="komunitas-stat">1.247 aktif hari ini</div></div>
+        <div class="btn-outline-sm" onclick="App.openSheet('sheet-signup')">+ Post</div>
+      </div>
+      <div class="feed-list" id="feed-list"></div>
+    </section>
+
+    <!-- ── Toko ── -->
+    <section class="page" id="pg-toko" aria-label="Toko">
+      <div style="padding:14px 18px 12px">
+        <div class="section-title-lg">Toko Muslimah</div>
+        <div class="filter-row">
+          <div class="filter-chip active">Semua</div>
+          <div class="filter-chip">Gamis</div>
+          <div class="filter-chip">Hijab</div>
+          <div class="filter-chip">Merchandise</div>
+        </div>
+      </div>
+      <div class="shop-grid" id="shop-grid"></div>
+    </section>
+
+  </main>
+
+  <!-- Tab Bar -->
+  <nav class="tab-bar" aria-label="Navigasi utama">
+    <div class="tab active" id="t-home" onclick="App.switchTab('home')" aria-label="Beranda">
+      <i class="ti ti-home"></i><span>Beranda</span>
+    </div>
+    <div class="tab" id="t-belajar" onclick="App.switchTab('belajar')" aria-label="Belajar">
+      <i class="ti ti-school"></i><span>Belajar</span>
+    </div>
+    <div class="tab" id="t-komunitas" onclick="App.switchTab('komunitas')" aria-label="Komunitas">
+      <i class="ti ti-users"></i><span>Komunitas</span>
+    </div>
+    <div class="tab" id="t-toko" onclick="App.switchTab('toko')" aria-label="Toko">
+      <i class="ti ti-shopping-bag"></i><span>Toko</span>
+    </div>
+  </nav>
+
+</div>
+
+<!-- ─── BOTTOM SHEETS ─────────────────────────────────────────────── -->
+
+<!-- Sign Up Sheet -->
+<div class="overlay" id="sheet-signup" onclick="App.closeSheet('sheet-signup')">
+  <div class="sheet" onclick="event.stopPropagation()">
+    <div class="sheet-handle"></div>
+    <div id="signup-step-1">
+      <div class="sheet-title">Gabung komunitas nūr.</div>
+      <div class="sheet-sub">Daftar gratis dengan nomor WhatsApp. Tidak perlu password.</div>
+      <input class="field" type="text" id="inp-name" placeholder="Nama panggilanmu" autocomplete="name"/>
+      <input class="field" type="tel" id="inp-phone" placeholder="Nomor WhatsApp (contoh: 08123...)" autocomplete="tel"/>
+      <div class="error-msg" id="err-1"></div>
+      <button class="btn-main" onclick="App.sendOTP()">Kirim Kode OTP via WhatsApp</button>
+      <div class="privacy-note">🔒 Data aman · Tidak ada spam</div>
+    </div>
+    <div id="signup-step-2" style="display:none">
+      <div class="sheet-title">Masukkan kode OTP</div>
+      <div class="sheet-sub">Kode 6 digit sudah dikirim ke WhatsApp kamu. Berlaku 5 menit.</div>
+      <input class="field otp-field" type="number" id="inp-otp" placeholder="______" maxlength="6" autocomplete="one-time-code"/>
+      <div class="error-msg" id="err-2"></div>
+      <button class="btn-main" onclick="App.verifyOTP()">Verifikasi & Masuk</button>
+      <div class="btn-text-link" onclick="App.resendOTP()">Kirim ulang OTP</div>
+    </div>
+  </div>
+</div>
+
+<!-- Video Sheet -->
+<div class="overlay" id="sheet-video" onclick="App.closeSheet('sheet-video')">
+  <div class="sheet" onclick="event.stopPropagation()">
+    <div class="sheet-handle"></div>
+    <div class="video-preview-thumb">
+      <div class="play-circle"><i class="ti ti-player-play"></i></div>
+      <div class="free-badge-thumb">Gratis untuk semua</div>
+    </div>
+    <div class="sheet-title" id="sv-title">Niat Hijrah yang Benar</div>
+    <div class="sheet-sub" id="sv-meta">Ust. Salim A Fillah · 8 menit</div>
+    <div class="sheet-sub" id="sv-desc" style="margin-top:6px">Pelajari apa itu hijrah yang sesungguhnya dan bagaimana membangun niat yang benar sebagai fondasi perjalananmu.</div>
+    <button class="btn-main" onclick="App.closeSheet('sheet-video')">Tonton sekarang — Gratis</button>
+    <div class="btn-text-link" onclick="App.closeSheet('sheet-video')">Nanti saja</div>
+  </div>
+</div>
+
+<!-- Lock Sheet -->
+<div class="overlay" id="sheet-lock" onclick="App.closeSheet('sheet-lock')">
+  <div class="sheet" onclick="event.stopPropagation()">
+    <div class="sheet-handle"></div>
+    <div style="text-align:center;font-size:40px;margin-bottom:12px">🔐</div>
+    <div class="sheet-title">Konten Member</div>
+    <div class="sheet-sub">Daftar gratis untuk mengakses semua konten dan mulai simpan progressmu.</div>
+    <div class="feat-box">
+      <div class="feat-row"><i class="ti ti-check"></i> Akses 50+ video kajian pilihan</div>
+      <div class="feat-row"><i class="ti ti-check"></i> Kurikulum terstruktur bersertifikat</div>
+      <div class="feat-row"><i class="ti ti-check"></i> Diskon 20% semua produk toko</div>
+      <div class="feat-row"><i class="ti ti-check"></i> Event gratis & komunitas eksklusif</div>
+    </div>
+    <button class="btn-main" onclick="App.closeSheet('sheet-lock');App.openSheet('sheet-signup')">Daftar gratis sekarang</button>
+    <div class="btn-text-link" onclick="App.closeSheet('sheet-lock')">Lanjut jelajahi dulu</div>
+  </div>
+</div>
+
+<!-- Event Sheet -->
+<div class="overlay" id="sheet-event" onclick="App.closeSheet('sheet-event')">
+  <div class="sheet" onclick="event.stopPropagation()">
+    <div class="sheet-handle"></div>
+    <div class="sheet-title" id="se-title">Halaqah Muslimah</div>
+    <div class="sheet-sub" id="se-detail"></div>
+    <button class="btn-main" id="se-cta" onclick="App.closeSheet('sheet-event');App.openSheet('sheet-signup')">Daftar sekarang</button>
+    <div class="btn-text-link" onclick="App.closeSheet('sheet-event')">Nanti saja</div>
+  </div>
+</div>
+
+<!-- Product Sheet -->
+<div class="overlay" id="sheet-product" onclick="App.closeSheet('sheet-product')">
+  <div class="sheet" onclick="event.stopPropagation()">
+    <div class="sheet-handle"></div>
+    <div class="product-thumb-sheet"><i class="ti ti-shirt" id="sp-icon"></i></div>
+    <div class="sheet-title" id="sp-name"></div>
+    <div class="sheet-sub">Material crinkle premium · Tersedia berbagai pilihan</div>
+    <div class="price-row">
+      <div class="price-main" id="sp-price"></div>
+      <div class="price-member" id="sp-member"></div>
+    </div>
+    <button class="btn-main" onclick="App.closeSheet('sheet-product');App.openSheet('sheet-signup')">Beli — Daftar dulu gratis</button>
+    <div class="btn-text-link" onclick="App.closeSheet('sheet-product')">Simpan ke wishlist</div>
+  </div>
+</div>
+
+<!-- Notif Sheet -->
+<div class="overlay" id="sheet-notif" onclick="App.closeSheet('sheet-notif')">
+  <div class="sheet" onclick="event.stopPropagation()">
+    <div class="sheet-handle"></div>
+    <div style="font-size:15px;font-weight:500;color:#F2F0E8;margin-bottom:14px">Notifikasi</div>
+    <div class="notif-list">
+      <div class="notif-item">
+        <div class="notif-icon green"><i class="ti ti-player-play"></i></div>
+        <div><div class="notif-title">Video baru: Shalat Khusyu' tersedia</div><div class="notif-time">2 jam lalu</div></div>
+      </div>
+      <div class="notif-item">
+        <div class="notif-icon amber"><i class="ti ti-star"></i></div>
+        <div><div class="notif-title">Event kajian baru di Jogja — 15 Juni</div><div class="notif-time">5 jam lalu</div></div>
+      </div>
+      <div class="notif-item" style="border:none">
+        <div class="notif-icon green"><i class="ti ti-heart"></i></div>
+        <div><div class="notif-title">Selamat datang di nūr. 🌿</div><div class="notif-time">Baru saja</div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Success Toast -->
+<div class="toast" id="toast"></div>
+
+<script src="/app.js"></script>
+</body>
+</html>
