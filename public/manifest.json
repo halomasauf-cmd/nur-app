@@ -1,0 +1,24 @@
+{
+  "name": "nūr.",
+  "short_name": "nūr",
+  "description": "Platform tumbuh muslimah hijrah",
+  "start_url": "/",
+  "display": "standalone",
+  "theme_color": "#0C1C14",
+  "background_color": "#0C1C14",
+  "orientation": "portrait",
+  "icons": [
+    {
+      "src": "/icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}
